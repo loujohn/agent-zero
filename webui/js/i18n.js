@@ -293,6 +293,12 @@ class I18n {
         "Title and description are visible to both you and the agent and can help it understand the project.",
       "project.optional_title": "Optional title",
       "project.color": "Color",
+      "project.non_sensitive_vars": "Non-sensitive variables",
+      "project.non_sensitive_vars_desc": "Store non-sensitive variables in .env format e.g. EMAIL_IMAP_SERVER=\"imap.gmail.com\", one item per line. You can use comments starting with # to add descriptions for the agent. See example. These variables are visible to LLMs and in chat history, they are not being masked.",
+      "project.sensitive_vars": "Sensitive variables", 
+      "project.sensitive_vars_desc": "Store secrets and credentials in .env format e.g. EMAIL_PASSWORD=\"s3cret-p4$$w0rd\", one item per line. You can use comments starting with # to add descriptions for the agent. See example. These variables are not visible to LLMs and in chat history, they are being masked. ⚠️ only values with length >= 4 are being masked to prevent false positives.",
+      "project.enter_variables": "Enter project variables",
+      "project.enter_secrets": "Enter project secrets",
 
       // 备份和恢复
       "backup.create_title": "Create Backup",
@@ -574,6 +580,12 @@ class I18n {
         "标题和描述对您和代理都可见，可以帮助它理解项目。",
       "project.optional_title": "可选标题",
       "project.color": "颜色",
+      "project.non_sensitive_vars": "非敏感变量",
+      "project.non_sensitive_vars_desc": "以 .env 格式存储非敏感变量，例如 EMAIL_IMAP_SERVER=\"imap.gmail.com\"，每行一个项目。您可以使用以 # 开头的注释为代理添加描述。查看示例。这些变量对 LLM 和聊天历史可见，不会被遮罩。",
+      "project.sensitive_vars": "敏感变量",
+      "project.sensitive_vars_desc": "以 .env 格式存储密钥和凭据，例如 EMAIL_PASSWORD=\"s3cret-p4$$w0rd\"，每行一个项目。您可以使用以 # 开头的注释为代理添加描述。查看示例。这些变量对 LLM 和聊天历史不可见，会被遮罩。⚠️ 只有长度 >= 4 的值才会被遮罩以防止误报。",
+      "project.enter_variables": "输入项目变量",
+      "project.enter_secrets": "输入项目密钥",
 
       // 备份和恢复
       "backup.create_title": "创建备份",
