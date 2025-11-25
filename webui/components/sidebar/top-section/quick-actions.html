@@ -8,11 +8,14 @@
 
 <body>
   <div class="config-section" x-data>
-    <button class="config-button" id="resetChat" @click="$store.chats.resetChat()">Reset Chat</button>
-    <button class="config-button" id="newChat" @click="$store.chats.newChat()">New Chat</button>
-    <button class="config-button" id="loadChats" @click="$store.chats.loadChats()">Load Chat</button>
-    <button class="config-button" id="loadChat" @click="$store.chats.saveChat()">Save Chat</button>
-    <button class="config-button" id="restart" @click="$store.chats.restart()">Restart</button>
+    <button class="config-button" id="resetChat" @click="$store.chats.resetChat()" data-i18n="chat.reset">Reset
+      Chat</button>
+    <button class="config-button" id="newChat" @click="$store.chats.newChat()" data-i18n="chat.new">New Chat</button>
+    <button class="config-button" id="loadChats" @click="$store.chats.loadChats()" data-i18n="chat.load">Load
+      Chat</button>
+    <button class="config-button" id="loadChat" @click="$store.chats.saveChat()" data-i18n="chat.save">Save
+      Chat</button>
+    <button class="config-button" id="restart" @click="$store.chats.restart()" data-i18n="chat.restart">Restart</button>
     <button class="config-button" id="settings" @click="settingsModalProxy.openModal()"><svg
         xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="-5.0 -17.0 110.0 135.0" fill="currentColor" width="24"
         height="24">
@@ -22,10 +25,10 @@
         <path
           d="m50.301 66.5c-9 0-16.398-7.3008-16.398-16.398 0-9.1016 7.3008-16.398 16.398-16.398 9.1016 0 16.398 7.3008 16.398 16.398 0 9.0977-7.3984 16.398-16.398 16.398zm0-25.5c-5 0-9.1016 4.1016-9.1016 9.1016s4.1016 9.1016 9.1016 9.1016 9.1016-4.1016 9.1016-9.1016c-0.003906-5-4.1016-9.1016-9.1016-9.1016z">
         </path>
-      </svg>Settings</button>
-    <button class="config-button" id="memory-dash"
-      @click="openModal('settings/memory/memory-dashboard.html');">Memory</button>
-    <button class="config-button" id="dashboard" @click="deselectChat()">Dashboard</button>
+      </svg><span data-i18n="settings.title">Settings</span></button>
+    <button class="config-button" id="memory-dash" @click="openModal('settings/memory/memory-dashboard.html');"
+      data-i18n="memory.title">Memory</button>
+    <button class="config-button" id="dashboard" @click="deselectChat()" data-i18n="dashboard.title">Dashboard</button>
 
   </div>
 </body>

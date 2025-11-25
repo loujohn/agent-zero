@@ -37,7 +37,7 @@ export function addActionButtonsToElement(element) {
   // Copy button - matches original design
   const copyBtn = document.createElement("button");
   copyBtn.className = "action-button copy-action";
-  copyBtn.setAttribute("aria-label", "Copy text");
+  copyBtn.setAttribute("aria-label", window.i18n?.translate("action.copy_text") || "Copy text");
   copyBtn.innerHTML =
     '<span class="material-symbols-outlined">content_copy</span>';
 

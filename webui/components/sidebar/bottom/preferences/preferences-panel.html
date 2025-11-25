@@ -13,7 +13,7 @@
               data-bs-toggle="collapse"
               @click="$store.sidebar.toggleSection('preferences')"
               x-effect="!$store.sidebar.isSectionOpen('preferences') ? $el.classList.add('collapsed') : $el.classList.remove('collapsed')">
-            Preferences
+            <span data-i18n="preferences.title">Preferences</span>
             <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
               <path d="M8 4l8 8-8 8" />
             </svg>
@@ -21,42 +21,42 @@
           <ul class="config-list collapse" id="preferences-collapse"
               x-effect="(() => { const c = bootstrap.Collapse.getOrCreateInstance($el, { toggle: false }); $store.sidebar.isSectionOpen('preferences') ? c.show() : c.hide(); })()">
             <li x-data>
-              <span>Autoscroll</span>
+              <span data-i18n="preferences.autoscroll">Autoscroll</span>
               <label class="switch">
                 <input id="auto-scroll-switch" type="checkbox" x-model="$store.preferences.autoScroll">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data>
-              <span class="switch-label">Dark mode</span>
+              <span class="switch-label" data-i18n="preferences.dark_mode">Dark mode</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.darkMode">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data>
-              <span class="switch-label">Speech</span>
+              <span class="switch-label" data-i18n="preferences.speech">Speech</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.speech">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data>
-              <span>Show thoughts</span>
+              <span data-i18n="preferences.show_thoughts">Show thoughts</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.showThoughts">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data>
-              <span>Show JSON</span>
+              <span data-i18n="preferences.show_json">Show JSON</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.showJson">
                 <span class="slider"></span>
               </label>
             </li>
             <li x-data>
-              <span>Show utility messages</span>
+              <span data-i18n="preferences.show_utils">Show utility messages</span>
               <label class="switch">
                 <input type="checkbox" x-model="$store.preferences.showUtils">
                 <span class="slider"></span>

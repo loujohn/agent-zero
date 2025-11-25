@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Notification Toast Stack</title>
+    <title data-i18n="notification.toast_stack">Notification Toast Stack</title>
     <script type="module">
         import { store } from "/components/notifications/notification-store.js";
     </script>
@@ -41,7 +41,7 @@
                     <!-- Toast Dismiss -->
                     <button class="toast-dismiss"
                             @click.stop="$store.notificationStore.dismissToast(toast.toastId)"
-                            title="Dismiss">
+                            data-i18n-title="notification.dismiss" title="Dismiss">
                         <span class="material-symbols-outlined">close</span>
                     </button>
                 </div>

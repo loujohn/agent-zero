@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国际化调试工具 - Agent Zero</title>
+    <script type="module" src="js/i18n.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .language-switcher {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .language-switcher button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: 2px solid #4248f1;
+            background: white;
+            color: #4248f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .language-switcher button:hover {
+            background: #4248f1;
+            color: white;
+        }
+        .language-switcher button.active {
+            background: #4248f1;
+            color: white;
+        }
+        .debug-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            border-left: 4px solid #4248f1;
+        }
+        .debug-item strong {
+            color: #4248f1;
+        }
+        .debug-log {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+        .test-button {
+            padding: 8px 16px;
+            margin: 5px;
+            border: 1px solid #4248f1;
+            background: white;
+            color: #4248f1;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .test-button:hover {
+            background: #4248f1;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <h1>🔧 Agent Zero 国际化调试工具</h1>
+        <button onclick="switchLanguage('en-US')" id="btn-en">English</button>
+        <button onclick="switchLanguage('zh-CN')" id="btn-zh">简体中文</button>
+        <button onclick="testTranslation()">测试翻译</button>
+        <button onclick="clearLog()">清空日志</button>
+    </div>
+
+    <div class="debug-section">
+        <h3>🌐 当前状态</h3>
+        <div class="debug-item">
+            <strong>当前语言:</strong> <span id="current-lang">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>localStorage语言:</strong> <span id="storage-lang">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>翻译系统状态:</strong> <span id="i18n-status">-</span>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h3>🧪 翻译测试</h3>
+        <div class="debug-item">
+            <strong>测试键 "common.save":</strong> <span id="test-save">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>测试键 "settings.title":</strong> <span id="test-settings">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>测试键 "chat.send":</strong> <span id="test-send">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>测试不存在的键:</strong> <span id="test-missing">-</span>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h3>🔍 页面元素测试</h3>
+        <div class="debug-item">
+            <strong>data-i18n 元素数量:</strong> <span id="i18n-elements">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>data-i18n-placeholder 元素数量:</strong> <span id="placeholder-elements">-</span>
+        </div>
+        <div class="debug-item">
+            <strong>data-i18n-title 元素数量:</strong> <span id="title-elements">-</span>
+        </div>
+        
+        <h4>测试元素：</h4>
+        <p data-i18n="common.save">Save</p>
+        <input data-i18n-placeholder="chat.input.placeholder" placeholder="Type your message here...">
+        <button data-i18n-title="common.close" title="Close">关闭按钮</button>
+    </div>
+
+    <div class="debug-section">
+        <h3>📋 调试日志</h3>
+        <div id="debug-log" class="debug-log">等待调试信息...</div>
+    </div>
+
+    <script>
+        let debugLog = '';
+        
+        function log(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            debugLog += `[${timestamp}] ${message}\n`;
+            document.getElementById('debug-log').textContent = debugLog;
+            console.log(message);
+        }
+        
+        function clearLog() {
+            debugLog = '';
+            document.getElementById('debug-log').textContent = '日志已清空...';
+        }
+        
+        function switchLanguage(lang) {
+            log(`切换语言到: ${lang}`);
+            if (window.i18n) {
+                window.i18n.setLanguage(lang);
+                updateStatus();
+                updateActiveButton(lang);
+            } else {
+                log('错误: i18n系统未初始化');
+            }
+        }
+        
+        function testTranslation() {
+            log('开始翻译测试...');
+            if (window.i18n) {
+                document.getElementById('test-save').textContent = window.i18n.t('common.save');
+                document.getElementById('test-settings').textContent = window.i18n.t('settings.title');
+                document.getElementById('test-send').textContent = window.i18n.t('chat.send');
+                document.getElementById('test-missing').textContent = window.i18n.t('nonexistent.key', 'fallback text');
+                log('翻译测试完成');
+            } else {
+                log('错误: i18n系统未初始化');
+            }
+        }
+        
+        function updateStatus() {
+            if (window.i18n) {
+                document.getElementById('current-lang').textContent = window.i18n.getCurrentLanguage();
+                document.getElementById('i18n-status').textContent = '已初始化';
+            } else {
+                document.getElementById('current-lang').textContent = '未知';
+                document.getElementById('i18n-status').textContent = '未初始化';
+            }
+            
+            document.getElementById('storage-lang').textContent = localStorage.getItem('agent-zero-language') || '无';
+            
+            // 统计页面元素
+            document.getElementById('i18n-elements').textContent = document.querySelectorAll('[data-i18n]').length;
+            document.getElementById('placeholder-elements').textContent = document.querySelectorAll('[data-i18n-placeholder]').length;
+            document.getElementById('title-elements').textContent = document.querySelectorAll('[data-i18n-title]').length;
+        }
+        
+        function updateActiveButton(lang) {
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (lang === 'en-US') {
+                document.getElementById('btn-en').classList.add('active');
+            } else if (lang === 'zh-CN') {
+                document.getElementById('btn-zh').classList.add('active');
+            }
+        }
+        
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            log('页面加载完成');
+            
+            // 等待i18n系统加载
+            setTimeout(() => {
+                log('检查i18n系统状态...');
+                updateStatus();
+                testTranslation();
+                
+                if (window.i18n) {
+                    updateActiveButton(window.i18n.getCurrentLanguage());
+                    log('i18n系统初始化完成');
+                } else {
+                    log('警告: i18n系统未找到');
+                }
+            }, 500);
+        });
+        
+        // 监听语言变更事件
+        window.addEventListener('language-changed', function(event) {
+            log(`语言变更事件触发: ${event.detail.language}`);
+            updateStatus();
+            testTranslation();
+            updateActiveButton(event.detail.language);
+        });
+        
+        // 覆盖console.log来捕获调试信息
+        const originalLog = console.log;
+        console.log = function(...args) {
+            if (args[0] && typeof args[0] === 'string' && args[0].includes('i18n')) {
+                log(args.join(' '));
+            }
+            originalLog.apply(console, args);
+        };
+    </script>
+</body>
+</html>

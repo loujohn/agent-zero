@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快速语言测试 - Agent Zero</title>
+    <script type="module" src="js/i18n.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-buttons { margin: 20px 0; }
+        .test-buttons button { margin: 5px; padding: 10px 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>快速语言切换测试</h1>
+    
+    <div class="test-buttons">
+        <button onclick="window.i18n && window.i18n.setLanguage('en-US')">切换到英文</button>
+        <button onclick="window.i18n && window.i18n.setLanguage('zh-CN')">切换到中文</button>
+        <button onclick="testUpdate()">强制更新页面</button>
+    </div>
+    
+    <div class="test-section">
+        <h3>测试元素</h3>
+        <p data-i18n="common.save">Save</p>
+        <p data-i18n="settings.title">Settings</p>
+        <p data-i18n="chat.send">Send</p>
+        <p data-i18n="sidebar.chats">Chats</p>
+        <p data-i18n="status.running">Running</p>
+        <input data-i18n-placeholder="chat.input.placeholder" placeholder="Type your message here...">
+    </div>
+    
+    <div class="test-section">
+        <h3>状态信息</h3>
+        <p>当前语言: <span id="current-lang">-</span></p>
+        <p>i18n系统: <span id="i18n-status">-</span></p>
+        <p>翻译元素数量: <span id="element-count">-</span></p>
+    </div>
+    
+    <script>
+        function testUpdate() {
+            if (window.i18n) {
+                console.log('强制更新页面文本...');
+                window.i18n.updatePageTexts();
+                updateStatus();
+            } else {
+                console.error('i18n系统未找到');
+            }
+        }
+        
+        function updateStatus() {
+            document.getElementById('current-lang').textContent = window.i18n ? window.i18n.getCurrentLanguage() : '未知';
+            document.getElementById('i18n-status').textContent = window.i18n ? '已加载' : '未加载';
+            document.getElementById('element-count').textContent = document.querySelectorAll('[data-i18n]').length;
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('页面加载完成，等待i18n系统...');
+            
+            const checkI18n = () => {
+                if (window.i18n) {
+                    console.log('i18n系统已加载');
+                    updateStatus();
+                    window.i18n.updatePageTexts();
+                } else {
+                    console.log('等待i18n系统加载...');
+                    setTimeout(checkI18n, 100);
+                }
+            };
+            
+            checkI18n();
+        });
+        
+        window.addEventListener('language-changed', function(event) {
+            console.log('语言变更事件:', event.detail.language);
+            updateStatus();
+        });
+    </script>
+</body>
+</html>

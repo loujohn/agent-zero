@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国际化测试 - Agent Zero</title>
+    <script type="module" src="js/i18n.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .language-switcher {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .language-switcher button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            border: 2px solid #4248f1;
+            background: white;
+            color: #4248f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .language-switcher button:hover {
+            background: #4248f1;
+            color: white;
+        }
+        .language-switcher button.active {
+            background: #4248f1;
+            color: white;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        .test-item strong {
+            color: #4248f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <h2>Agent Zero 国际化测试</h2>
+        <button onclick="switchLanguage('en-US')" id="btn-en">English</button>
+        <button onclick="switchLanguage('zh-CN')" id="btn-zh">简体中文</button>
+    </div>
+
+    <div class="test-section">
+        <h3>通用按钮测试</h3>
+        <div class="test-item">
+            <strong>保存:</strong> <span data-i18n="common.save">Save</span>
+        </div>
+        <div class="test-item">
+            <strong>取消:</strong> <span data-i18n="common.cancel">Cancel</span>
+        </div>
+        <div class="test-item">
+            <strong>关闭:</strong> <span data-i18n="common.close">Close</span>
+        </div>
+        <div class="test-item">
+            <strong>删除:</strong> <span data-i18n="common.delete">Delete</span>
+        </div>
+        <div class="test-item">
+            <strong>编辑:</strong> <span data-i18n="common.edit">Edit</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>设置页面测试</h3>
+        <div class="test-item">
+            <strong>设置:</strong> <span data-i18n="settings.title">Settings</span>
+        </div>
+        <div class="test-item">
+            <strong>语言:</strong> <span data-i18n="settings.language">Language</span>
+        </div>
+        <div class="test-item">
+            <strong>智能体设置:</strong> <span data-i18n="settings.agent">Agent Settings</span>
+        </div>
+        <div class="test-item">
+            <strong>外部服务:</strong> <span data-i18n="settings.external">External Services</span>
+        </div>
+        <div class="test-item">
+            <strong>任务调度器:</strong> <span data-i18n="settings.scheduler">Task Scheduler</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>聊天界面测试</h3>
+        <div class="test-item">
+            <strong>输入框占位符:</strong> 
+            <input type="text" data-i18n-placeholder="chat.input.placeholder" placeholder="Type your message here..." style="width: 100%; padding: 8px;">
+        </div>
+        <div class="test-item">
+            <strong>发送:</strong> <span data-i18n="chat.send">Send</span>
+        </div>
+        <div class="test-item">
+            <strong>新建聊天:</strong> <span data-i18n="chat.new">New Chat</span>
+        </div>
+        <div class="test-item">
+            <strong>聊天历史:</strong> <span data-i18n="chat.history">Chat History</span>
+        </div>
+        <div class="test-item">
+            <strong>重置聊天:</strong> <span data-i18n="chat.reset">Reset Chat</span>
+        </div>
+        <div class="test-item">
+            <strong>加载聊天:</strong> <span data-i18n="chat.load">Load Chat</span>
+        </div>
+        <div class="test-item">
+            <strong>保存聊天:</strong> <span data-i18n="chat.save">Save Chat</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>登录页面测试</h3>
+        <div class="test-item">
+            <strong>用户名:</strong> <span data-i18n="login.username">Username</span>
+        </div>
+        <div class="test-item">
+            <strong>密码:</strong> <span data-i18n="login.password">Password</span>
+        </div>
+        <div class="test-item">
+            <strong>登录按钮:</strong> <span data-i18n="login.button">Login</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>侧边栏测试</h3>
+        <div class="test-item">
+            <strong>聊天:</strong> <span data-i18n="sidebar.chats">Chats</span>
+        </div>
+        <div class="test-item">
+            <strong>任务:</strong> <span data-i18n="sidebar.tasks">Tasks</span>
+        </div>
+        <div class="test-item">
+            <strong>没有聊天:</strong> <span data-i18n="sidebar.no_chats">No chats to list.</span>
+        </div>
+        <div class="test-item">
+            <strong>没有任务:</strong> <span data-i18n="sidebar.no_tasks">No tasks to list.</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>状态和操作测试</h3>
+        <div class="test-item">
+            <strong>状态 - 空闲:</strong> <span data-i18n="status.idle">Idle</span>
+        </div>
+        <div class="test-item">
+            <strong>状态 - 运行中:</strong> <span data-i18n="status.running">Running</span>
+        </div>
+        <div class="test-item">
+            <strong>状态 - 已禁用:</strong> <span data-i18n="status.disabled">Disabled</span>
+        </div>
+        <div class="test-item">
+            <strong>状态 - 错误:</strong> <span data-i18n="status.error">Error</span>
+        </div>
+        <div class="test-item">
+            <strong>操作 - 运行:</strong> <span data-i18n="action.run">Run</span>
+        </div>
+        <div class="test-item">
+            <strong>操作 - 停止:</strong> <span data-i18n="action.stop">Stop</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>消息类型测试</h3>
+        <div class="test-item">
+            <strong>用户消息:</strong> <span data-i18n="message.user">User</span>
+        </div>
+        <div class="test-item">
+            <strong>智能体消息:</strong> <span data-i18n="message.agent">Agent</span>
+        </div>
+        <div class="test-item">
+            <strong>工具消息:</strong> <span data-i18n="message.tool">Tool</span>
+        </div>
+        <div class="test-item">
+            <strong>代码执行:</strong> <span data-i18n="message.code_exe">Code Execution</span>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h3>当前语言信息</h3>
+        <div class="test-item">
+            <strong>当前语言:</strong> <span id="current-lang">-</span>
+        </div>
+        <div class="test-item">
+            <strong>可用语言:</strong>
+            <ul id="available-langs"></ul>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (window.i18n) {
+                window.i18n.setLanguage(lang);
+                updateLanguageInfo();
+                updateActiveButton(lang);
+            }
+        }
+
+        function updateLanguageInfo() {
+            if (window.i18n) {
+                document.getElementById('current-lang').textContent = window.i18n.getCurrentLanguage();
+                
+                const availableLangs = window.i18n.getAvailableLanguages();
+                const langsList = document.getElementById('available-langs');
+                langsList.innerHTML = '';
+                availableLangs.forEach(lang => {
+                    const li = document.createElement('li');
+                    li.textContent = `${lang.code}: ${lang.nativeName}`;
+                    langsList.appendChild(li);
+                });
+            }
+        }
+
+        function updateActiveButton(lang) {
+            document.querySelectorAll('.language-switcher button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            if (lang === 'en-US') {
+                document.getElementById('btn-en').classList.add('active');
+            } else if (lang === 'zh-CN') {
+                document.getElementById('btn-zh').classList.add('active');
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 等待i18n系统加载
+            setTimeout(() => {
+                updateLanguageInfo();
+                updateActiveButton(window.i18n ? window.i18n.getCurrentLanguage() : 'en-US');
+            }, 100);
+        });
+
+        // 监听语言变更事件
+        window.addEventListener('language-changed', function(event) {
+            updateLanguageInfo();
+            updateActiveButton(event.detail.language);
+        });
+    </script>
+</body>
+</html>

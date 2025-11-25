@@ -17,12 +17,12 @@
             </label>
             <input type="file" id="file-input" accept="*" multiple style="display: none" @change="$store.chatAttachments.handleFileUpload($event)">
 
-            <div x-show="showTooltip" class="tooltip">Add attachments to the message</div>
+            <div x-show="showTooltip" class="tooltip" data-i18n="chat.attachment.tooltip">Add attachments to the message</div>
         </div>
 
         <!-- Container for textarea and expand button -->
         <div id="chat-input-container" style="position: relative;">
-            <textarea id="chat-input" placeholder="Type your message here..." rows="1"
+            <textarea id="chat-input" data-i18n-placeholder="chat.input.placeholder" placeholder="Type your message here..." rows="1"
 +                     @keydown.enter="if (!$event.shiftKey && !$event.isComposing && $event.keyCode !== 229) { $event.preventDefault(); $store.chatInput.sendMessage(); }"
                       @input="$store.chatInput.adjustTextareaHeight()"></textarea>
             <button id="expand-button" @click="$store.fullScreenInputModal.openModal()" aria-label="Expand input">

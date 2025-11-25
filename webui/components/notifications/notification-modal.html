@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <title>Notifications</title>
+    <title data-i18n="notification.notifications">Notifications</title>
     <script type="module">
         import { store } from "/components/notifications/notification-store.js";
     </script>
@@ -16,8 +16,8 @@
                     <div class="notification-header-actions">
                         <button class="notification-action" @click="$store.notificationStore?.clearAll()"
                             :disabled="!$store.notificationStore || $store.notificationStore.getDisplayNotifications().length === 0"
-                            title="Clear All">
-                            <span class="material-symbols-outlined">delete</span> Clear All
+                            data-i18n-title="notification.clear_all" title="Clear All">
+                            <span class="material-symbols-outlined">delete</span> <span data-i18n="notification.clear_all">Clear All</span>
                         </button>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
                                 <!-- Expand Toggle Button (as last row element) -->
                                 <button class="notification-expand-toggle" x-show="notification.detail"
                                     @click.stop="expanded = !expanded"
-                                    :title="expanded ? 'Collapse Details' : 'Expand Details'">
-                                    <span x-show="!expanded">▶ Show Details</span>
-                                    <span x-show="expanded">▼ Hide Details</span>
+                                    :title="expanded ? t('notification.collapse_details') : t('notification.expand_details')">
+                                    <span x-show="!expanded" data-i18n="notification.show_details">▶ Show Details</span>
+                                    <span x-show="expanded" data-i18n="notification.hide_details">▼ Hide Details</span>
                                 </button>
 
                                 <!-- Expandable Detail Content -->
@@ -73,7 +73,7 @@
                     <div class="notification-empty-icon">
                         <span class="material-symbols-outlined">notifications</span>
                     </div>
-                    <p>No notifications to display</p>
+                    <p data-i18n="notification.no_notifications">No notifications to display</p>
                 </div>
             </div>
         </template>
